@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "552920658830",
+    "project_id": "gamer-mvvm-app-e260d",
+    "storage_bucket": "gamer-mvvm-app-e260d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:552920658830:android:80e3169d8a3029d990eadf",
+        "android_client_info": {
+          "package_name": "com.ismael.appgamermvvm"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "552920658830-h77m4rp173emnova85bkmkkr3vgh6ic6.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDnFACx-2CNPw8-lgyE1iEx7oBlcTBiVKs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "552920658830-h77m4rp173emnova85bkmkkr3vgh6ic6.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
