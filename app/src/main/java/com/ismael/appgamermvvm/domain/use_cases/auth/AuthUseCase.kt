@@ -1,4 +1,4 @@
-package com.ismael.appgamermvvm.domain.use_cases_auth
+package com.ismael.appgamermvvm.domain.use_cases.auth
 
 data class AuthUseCase(
   val getCurrentUser : GetCurrentUser,

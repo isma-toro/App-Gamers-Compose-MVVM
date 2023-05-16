@@ -1,6 +1,5 @@
-package com.ismael.appgamermvvm.domain.use_cases_auth
+package com.ismael.appgamermvvm.domain.use_cases.auth
 
-import com.ismael.appgamermvvm.data.repository.AuthRepositoryImpl
 import com.ismael.appgamermvvm.domain.repository.AuthRepository
 import javax.inject.Inject
 

@@ -44,7 +44,7 @@ import com.ismael.appgamermvvm.presentation.ui.theme.Red500
 
 @Composable
 fun SingUpContent(navController : NavHostController, viewModel: SignUpViewModel = hiltViewModel()) {
-  val signUpFlow = viewModel.signUpFlow.collectAsState()
+  val state = viewModel.state
 
   Box(
     modifier = Modifier
@@ -98,11 +98,11 @@ fun SingUpContent(navController : NavHostController, viewModel: SignUpViewModel 
 
         DefaultTextField(
           modifier = Modifier.padding(top = 25.dp),
-          value = viewModel.userName.value,
-          onValueChange = {viewModel.userName.value = it},
+          value = state.userName,
+          onValueChange = {viewModel.onUserNameInput(it)},
           label = "Nombre de usuario",
           icon = Icons.Default.Person,
-          errorMessage = viewModel.userNameErrorMessage.value,
+          errorMessage = viewModel.userNameErrorMessage,
           validateField = {
             viewModel.validateUserName()
           }
@@ -110,12 +110,12 @@ fun SingUpContent(navController : NavHostController, viewModel: SignUpViewModel 
 
         DefaultTextField(
           modifier = Modifier.padding(top = 0.dp),
-          value = viewModel.email.value,
-          onValueChange = {viewModel.email.value = it},
+          value = state.email,
+          onValueChange = {viewModel.onEmailInut(it)},
           label = "Correo electrónico",
           icon = Icons.Default.Email,
           keyboardType = KeyboardType.Email,
-          errorMessage = viewModel.emailErrorMessage.value,
+          errorMessage = viewModel.emailErrorMessage,
           validateField = {
             viewModel.validateEmail()
           }
@@ -123,12 +123,12 @@ fun SingUpContent(navController : NavHostController, viewModel: SignUpViewModel 
 
         DefaultTextField(
           modifier = Modifier.padding(top = 0.dp),
-          value = viewModel.password.value,
-          onValueChange = {viewModel.password.value = it},
+          value = state.password,
+          onValueChange = {viewModel.onPasswordInput(it)},
           label = "Contraseña",
           icon = Icons.Default.Lock,
           hideText = true,
-          errorMessage = viewModel.passwordErrorMessage.value,
+          errorMessage = viewModel.passwordErrorMessage,
           validateField = {
             viewModel.validatePassword()
           }
@@ -136,12 +136,12 @@ fun SingUpContent(navController : NavHostController, viewModel: SignUpViewModel 
 
         DefaultTextField(
           modifier = Modifier.padding(top = 0.dp),
-          value = viewModel.confirmPassword.value,
-          onValueChange = {viewModel.confirmPassword.value = it},
+          value = state.confirmPasword,
+          onValueChange = {viewModel.onConfirmPasswordInput(it)},
           label = "Confirmar Contraseña",
           icon = Icons.Outlined.Lock,
           hideText = true,
-          errorMessage = viewModel.confirmPasswordErrorMessage.value,
+          errorMessage = viewModel.confirmPasswordErrorMessage,
           validateField = {
             viewModel.validateConfirmPassword()
           }
@@ -161,31 +161,5 @@ fun SingUpContent(navController : NavHostController, viewModel: SignUpViewModel 
 
     }
 
-  }
-
-  signUpFlow.value.let {
-    when(it) {
-      is Response.Loading -> {
-        Box(
-          contentAlignment = Alignment.Center,
-          modifier = Modifier.fillMaxSize()
-        ) {
-          CircularProgressIndicator()
-        }
-      }
-
-      is Response.Success -> {
-        navController.popBackStack(AppScreen.Login.route, true)
-        LaunchedEffect(Unit) {
-          navController.navigate(AppScreen.Profile.route)
-        }
-      }
-
-      is Response.Failure -> {
-        Toast.makeText(LocalContext.current, it.exception?.message?: "Error desconocido", Toast.LENGTH_SHORT).show()
-      }
-
-      else -> {}
-    }
   }
 }

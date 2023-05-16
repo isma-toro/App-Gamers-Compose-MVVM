@@ -11,6 +11,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
+import com.ismael.appgamermvvm.presentation.pantallas.login.components.Login
 import com.ismael.appgamermvvm.presentation.pantallas.login.components.LoginBottomBar
 import com.ismael.appgamermvvm.presentation.pantallas.login.components.LoginContent
 import com.ismael.appgamermvvm.presentation.ui.theme.AppGamerMVVMTheme
@@ -29,6 +30,9 @@ fun LoginScreen(navController: NavHostController) {
       LoginBottomBar(navController)
     }
   )
+
+  //MANEJAR EL ESTADO DE LA PETICIÓN DE LOGIN
+  Login(navController = navController)
 
 
 }

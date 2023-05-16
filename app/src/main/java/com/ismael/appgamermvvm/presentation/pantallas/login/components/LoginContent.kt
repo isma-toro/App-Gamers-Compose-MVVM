@@ -53,7 +53,7 @@ fun LoginContent(
   navController: NavHostController,
   viewModel: LoginViewModel = hiltViewModel()
 ) {
-  val loginFlow = viewModel.loginFlow.collectAsState()
+  val state = viewModel.state
 
   Box(
     modifier = Modifier
@@ -109,12 +109,12 @@ fun LoginContent(
 
         DefaultTextField(
           modifier = Modifier.padding(top = 25.dp),
-          value = viewModel.email.value,
-          onValueChange = { viewModel.email.value = it },
+          value = state.email,
+          onValueChange = { viewModel.onEmailInput(it) },
           label = "Email",
           icon = Icons.Default.Email,
           keyboardType = KeyboardType.Email,
-          errorMessage = viewModel.emailErrorMessage.value,
+          errorMessage = viewModel.emailErrorMessage,
           validateField = {
             viewModel.validateEmail()
           }
@@ -125,12 +125,12 @@ fun LoginContent(
 
         DefaultTextField(
           modifier = Modifier.padding(top = 5.dp),
-          value = viewModel.password.value,
-          onValueChange = { viewModel.password.value = it },
+          value = state.password,
+          onValueChange = { viewModel.onPasswordInput(it) },
           label = "Contraseña",
           icon = Icons.Default.Lock,
           hideText = true,
-          errorMessage = viewModel.passwordErrorMessage.value,
+          errorMessage = viewModel.passwordErrorMessage,
           validateField = {
             viewModel.validatePassword()
           }
@@ -148,42 +148,6 @@ fun LoginContent(
           enable = viewModel.isEnabledLoginButton
         )
       }
-    }
-  }
-  loginFlow.value.let {
-    when (it) {
-
-      // MOSTRAR QUE SE ESTA REALIZANDO LA PETICIÓN Y TODAVÍA ESTÁ EN PROCESO
-      Response.Loading -> {
-        Box(
-          contentAlignment = Alignment.Center,
-          modifier = Modifier.fillMaxSize()
-        ) {
-          CircularProgressIndicator()
-        }
-      }
-
-      is Response.Success -> {
-        LaunchedEffect(Unit) {
-          navController.navigate(route = AppScreen.Profile.route) {
-            // PARA ELIMINAR EL HISTORIAL DE PANTALLAS A LA HORA DE HACER LA NAVEGACIÓN
-            popUpTo(AppScreen.Login.route) {
-              inclusive = true
-            }
-          }
-        }
-      }
-
-      is Response.Failure -> {
-        Toast.makeText(
-          LocalContext.current,
-          it.exception?.message ?: "Error desconocido",
-          Toast.LENGTH_SHORT
-        ).show()
-      }
-
-
-      else -> {}
     }
   }
 

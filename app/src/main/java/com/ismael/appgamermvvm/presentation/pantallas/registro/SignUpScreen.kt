@@ -12,6 +12,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.ismael.appgamermvvm.presentation.components.DefaultTopBar
+import com.ismael.appgamermvvm.presentation.pantallas.registro.components.SignUp
 import com.ismael.appgamermvvm.presentation.pantallas.registro.components.SingUpContent
 import com.ismael.appgamermvvm.presentation.ui.theme.AppGamerMVVMTheme
 
@@ -30,6 +31,9 @@ fun SingUpScreen(navController: NavHostController) {
     content = { SingUpContent(navController)},
     bottomBar = {}
   ) 
+  
+  SignUp(navController = navController)
+  
 }
 
 @Preview(showBackground = true, showSystemUi = true)
