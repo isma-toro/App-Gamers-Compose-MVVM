@@ -5,6 +5,8 @@ import com.google.firebase.firestore.CollectionReference
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
+import com.google.firebase.storage.FirebaseStorage
+import com.google.firebase.storage.StorageReference
 import com.ismael.appgamermvvm.core.Constants.USERS
 import com.ismael.appgamermvvm.data.repository.AuthRepositoryImpl
 import com.ismael.appgamermvvm.data.repository.UserRepositoryImpl
@@ -17,6 +19,8 @@ import com.ismael.appgamermvvm.domain.use_cases.auth.Logout
 import com.ismael.appgamermvvm.domain.use_cases.auth.SignUp
 import com.ismael.appgamermvvm.domain.use_cases.users.Create
 import com.ismael.appgamermvvm.domain.use_cases.users.GetUserById
+import com.ismael.appgamermvvm.domain.use_cases.users.SaveImage
+import com.ismael.appgamermvvm.domain.use_cases.users.Update
 import com.ismael.appgamermvvm.domain.use_cases.users.UsersUseCase
 import dagger.Module
 import dagger.Provides
@@ -29,6 +33,13 @@ object AppModule {
 
   @Provides
   fun providesFirebaseFireStore() : FirebaseFirestore = Firebase.firestore
+
+  @Provides
+  fun providesFirebaseStorage() : FirebaseStorage = FirebaseStorage.getInstance()
+
+  @Provides
+  fun providesStorageUsersRef(storage: FirebaseStorage) : StorageReference = storage.reference.child(
+    USERS)
 
   @Provides
   fun providesUsersRef(db : FirebaseFirestore): CollectionReference = db.collection(USERS)
@@ -53,6 +64,8 @@ object AppModule {
   @Provides
   fun provideUserUseCase(repository: UsersRepository) = UsersUseCase(
     create = Create(repository),
-    getUserById = GetUserById(repository)
+    getUserById = GetUserById(repository),
+    update = Update(repository),
+    saveImage = SaveImage(repository)
   )
 }

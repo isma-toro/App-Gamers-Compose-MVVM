@@ -27,7 +27,7 @@ fun DefaultButtom(
   errorMessage : String = "",
   onClick : () -> Unit,
   color: Color = Red500,
-  icon : ImageVector = Icons.Default.ArrowForward,
+  icon : ImageVector? = Icons.Default.ArrowForward,
   enable : Boolean = true,
   textIconColor : Color = Color.White
 ) {
@@ -38,12 +38,16 @@ fun DefaultButtom(
       colors = ButtonDefaults.buttonColors(color),
       enabled = enable
     ) {
-      Icon(
-        imageVector = icon,
-        contentDescription = "",
-        tint = textIconColor
-      )
-      Spacer(modifier = Modifier.width(10.dp))
+
+      icon?.let {
+        Icon(
+          imageVector = icon,
+          contentDescription = "",
+          tint = textIconColor
+        )
+        Spacer(modifier = Modifier.width(10.dp))
+      }
+
       Text(
         text = text,
         color = textIconColor
