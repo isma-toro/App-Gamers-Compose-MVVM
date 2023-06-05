@@ -1,5 +1,5 @@
 # App-Gamers-Compose-MVVM
-App made for practising MVVM, Jetpack Compose and Clean Architecture.
+Kotlin App made for practising MVVM, Jetpack Compose and Clean Architecture.
 
 Create and update users in real time
 
