@@ -3,6 +3,7 @@ package com.ismael.appgamermvvm.data.repository
 import android.net.Uri
 import com.google.firebase.firestore.CollectionReference
 import com.google.firebase.storage.StorageReference
+import com.ismael.appgamermvvm.core.Constants
 import com.ismael.appgamermvvm.domain.model.Response
 import com.ismael.appgamermvvm.domain.model.User
 import com.ismael.appgamermvvm.domain.repository.UsersRepository
@@ -13,10 +14,11 @@ import kotlinx.coroutines.tasks.await
 import java.io.File
 import java.lang.Exception
 import javax.inject.Inject
+import javax.inject.Named
 
 class UserRepositoryImpl @Inject constructor(
-  private val storageUsersRef: StorageReference,
-  private val usersRef: CollectionReference
+  @Named(Constants.USERS) private val storageUsersRef: StorageReference,
+  @Named(Constants.USERS) private val usersRef: CollectionReference
 ) : UsersRepository {
   override suspend fun create(user: User): Response<Boolean> {
     return try {

@@ -17,7 +17,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
-import com.ismael.appgamermvvm.presentation.navigation.AppScreen
+import com.ismael.appgamermvvm.presentation.navigation.AuthScreen
 
 @Composable
 fun LoginBottomBar(navController: NavController) {
@@ -37,7 +37,7 @@ fun LoginBottomBar(navController: NavController) {
 
     Text(
       modifier = Modifier.clickable {
-        navController.navigate(AppScreen.SinUp.route)
+        navController.navigate(AuthScreen.SinUp.route)
       },
       text = "REGISTRATE AQUÍ",
       color = Color.Red,

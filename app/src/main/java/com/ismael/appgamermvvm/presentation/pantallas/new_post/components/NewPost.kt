@@ -1,4 +1,4 @@
-package com.ismael.appgamermvvm.presentation.pantallas.login.components
+package com.ismael.appgamermvvm.presentation.pantallas.new_post.components
 
 import android.widget.Toast
 import androidx.compose.runtime.Composable
@@ -12,10 +12,11 @@ import com.ismael.appgamermvvm.presentation.navigation.AuthScreen
 import com.ismael.appgamermvvm.presentation.navigation.Graph
 import com.ismael.appgamermvvm.presentation.navigation.RootScreen
 import com.ismael.appgamermvvm.presentation.pantallas.login.LoginViewModel
+import com.ismael.appgamermvvm.presentation.pantallas.new_post.NewPostViewModel
 
 @Composable
-fun Login(navController : NavHostController, viewModel : LoginViewModel = hiltViewModel()) {
-  when (val loginResponse = viewModel.loginResponse) {
+fun NewPost(viewModel : NewPostViewModel = hiltViewModel()) {
+  when (val response = viewModel.createPostResponse) {
 
     // MOSTRAR QUE SE ESTA REALIZANDO LA PETICIÓN Y TODAVÍA ESTÁ EN PROCESO
     Response.Loading -> {
@@ -23,20 +24,14 @@ fun Login(navController : NavHostController, viewModel : LoginViewModel = hiltVi
     }
 
     is Response.Success -> {
-      LaunchedEffect(Unit) {
-        navController.navigate(route = Graph.HOME) {
-          // PARA ELIMINAR EL HISTORIAL DE PANTALLAS A LA HORA DE HACER LA NAVEGACIÓN
-          popUpTo(Graph.AUTHENTICATION) {
-            inclusive = true
-          }
-        }
-      }
+      viewModel.clearForm()
+      Toast.makeText(LocalContext.current, "La publicación se ha creado correctamente", Toast.LENGTH_LONG).show()
     }
 
     is Response.Failure -> {
       Toast.makeText(
         LocalContext.current,
-        loginResponse.exception?.message ?: "Error desconocido",
+        response.exception?.message ?: "Error desconocido",
         Toast.LENGTH_SHORT
       ).show()
     }

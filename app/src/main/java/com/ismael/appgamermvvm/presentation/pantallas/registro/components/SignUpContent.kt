@@ -1,12 +1,10 @@
 package com.ismael.appgamermvvm.presentation.pantallas.registro.components
 
-import android.widget.Toast
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -17,15 +15,11 @@ import androidx.compose.material.icons.filled.Person
 import androidx.compose.material.icons.outlined.Lock
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
-import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
@@ -34,10 +28,8 @@ import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import com.ismael.appgamermvvm.R
-import com.ismael.appgamermvvm.domain.model.Response
 import com.ismael.appgamermvvm.presentation.components.DefaultButtom
 import com.ismael.appgamermvvm.presentation.components.DefaultTextField
-import com.ismael.appgamermvvm.presentation.navigation.AppScreen
 import com.ismael.appgamermvvm.presentation.pantallas.registro.SignUpViewModel
 import com.ismael.appgamermvvm.presentation.ui.theme.DarkGray500
 import com.ismael.appgamermvvm.presentation.ui.theme.Red500
@@ -59,23 +51,23 @@ fun SingUpContent(navController : NavHostController, viewModel: SignUpViewModel 
         .fillMaxWidth()
     ) {
 
-      Column(
-        modifier = Modifier.fillMaxWidth(),
-        horizontalAlignment = Alignment.CenterHorizontally
-      ) {
-        Spacer(modifier = Modifier.height(65.dp))
-
-        Image(
-          modifier = Modifier.height(100.dp),
-          painter = painterResource(id = R.drawable.user),
-          contentDescription = "Imagen del usuario"
-        )
-      }
+//      Column(
+//        modifier = Modifier.fillMaxWidth(),
+//        horizontalAlignment = Alignment.CenterHorizontally
+//      ) {
+//        Spacer(modifier = Modifier.height(65.dp))
+//
+//        Image(
+//          modifier = Modifier.height(100.dp),
+//          painter = painterResource(id = R.drawable.user),
+//          contentDescription = "Imagen del usuario"
+//        )
+//      }
 
     }
 
     Card(
-      modifier = Modifier.padding(start = 40.dp, end = 40.dp, top = 200.dp),
+      modifier = Modifier.padding(start = 40.dp, end = 40.dp, top = 100.dp),
       colors = CardDefaults.cardColors(containerColor = DarkGray500)
     ) {
 

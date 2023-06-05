@@ -6,41 +6,32 @@ import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
+import com.ismael.appgamermvvm.presentation.pantallas.home.HomeScreen
 import com.ismael.appgamermvvm.presentation.pantallas.login.LoginScreen
 import com.ismael.appgamermvvm.presentation.pantallas.profile.ProfileScreen
 import com.ismael.appgamermvvm.presentation.pantallas.profile_edit.ProfileEditScreen
 import com.ismael.appgamermvvm.presentation.pantallas.registro.SingUpScreen
 
 @Composable
-fun AppNavigation(navController : NavHostController) {
+fun RootNavGraph(navController : NavHostController) {
 
   NavHost(
     navController = navController,
-    startDestination = AppScreen.Login.route
+    route = Graph.ROOT,
+    startDestination = Graph.AUTHENTICATION
   ) {
-    composable(route = AppScreen.Login.route) {
-      LoginScreen(navController)
-    }
 
-    composable(route = AppScreen.SinUp.route) {
-      SingUpScreen(navController)
-    }
+    authNavGraph(navController = navController)
 
-    composable(route = AppScreen.Profile.route) {
-      ProfileScreen(navController)
-    }
-
-    composable(
-      route = AppScreen.ProfileEdit.route,
-      arguments = listOf(navArgument("user") {
-        type = NavType.StringType
-      })
-    ) {
-      it.arguments?.getString("user")?.let {
-        ProfileEditScreen(navController, user = it)
-
-      }
+    composable(route = Graph.HOME) {
+      HomeScreen()
     }
   }
 
+}
+
+sealed class RootScreen(
+  val route : String
+) {
+  object Home : RootScreen("home")
 }
